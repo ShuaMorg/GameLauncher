@@ -1,5 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const popSound = document.getElementById('popSound');
 
 let balls = [{
     x: canvas.width / 2,
@@ -19,6 +20,10 @@ let square = {
 
 let gameOver = false;
 let safePeriod = false;
+let ballCreationTimer = null;
+let elapsedTime = 0;
+let shrinkTimer = null;
+let speedIncreaseTimer = null;
 
 document.addEventListener('keydown', (event) => {
     if (gameOver) return;
@@ -51,6 +56,11 @@ canvas.addEventListener('click', (event) => {
         const distance = Math.hypot(mouseX - ball.x, mouseY - ball.y);
         if (distance < ball.radius) {
             splitBall(ball, i);
+            if (balls.length === 1) {
+                startBallCreationTimer();
+                startShrinkTimer();
+                startSpeedIncreaseTimer();
+            }
             break;
         }
     }
@@ -95,10 +105,12 @@ function updateBall(ball) {
 
     if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
         ball.dx = -ball.dx;
+        popSound.play();
     }
 
     if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
         ball.dy = -ball.dy;
+        popSound.play();
     }
 }
 
@@ -134,9 +146,18 @@ function displayGameOver() {
     ctx.fillText('You Lose Mother Fucker!!!', canvas.width / 2, canvas.height / 2);
 }
 
+function drawCountdown() {
+    const countdown = Math.ceil((5000 - elapsedTime) / 1000);
+    ctx.fillStyle = 'black';
+    ctx.font = '24px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`Next shrink in: ${countdown} seconds`, canvas.width - 10, 30);
+}
+
 function draw() {
     if (gameOver) return;
 
+    elapsedTime += 16; // Increment elapsed time
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     balls.forEach(ball => {
         drawBall(ball);
@@ -144,7 +165,70 @@ function draw() {
         checkCollision(ball);
     });
     drawSquare();
+    drawCountdown();
     requestAnimationFrame(draw);
+}
+
+function shrinkPlayArea() {
+    canvas.width -= 50;
+    canvas.height -= 50;
+    square.x = Math.min(square.x, canvas.width - square.size);
+    square.y = Math.min(square.y, canvas.height - square.size);
+}
+
+function startShrinkTimer() {
+    shrinkTimer = setInterval(() => {
+        shrinkPlayArea();
+    }, 5000); // Shrink play area every 5 seconds
+}
+
+function stopShrinkTimer() {
+    clearInterval(shrinkTimer);
+}
+
+function increaseBallSpeed() {
+    balls.forEach(ball => {
+        if (ball.color === 'green') {
+            ball.dx *= 1.1;
+            ball.dy *= 1.1;
+        }
+    });
+}
+
+function startSpeedIncreaseTimer() {
+    speedIncreaseTimer = setInterval(() => {
+        increaseBallSpeed();
+    }, 1000); // Increase ball speed every second
+}
+
+function stopSpeedIncreaseTimer() {
+    clearInterval(speedIncreaseTimer);
+}
+
+function createBalls(numBalls) {
+    for (let i = 0; i < numBalls; i++) {
+        const initialDX = Math.random() * 4 - 2; // Random horizontal velocity
+        const initialDY = Math.random() * 4 - 2; // Random vertical velocity
+
+        balls.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: 30,
+            dx: initialDX,
+            dy: initialDY,
+            color: 'red'
+        });
+    }
+}
+
+function startBallCreationTimer() {
+    ballCreationTimer = setInterval(() => {
+        createBalls(balls.length);
+    }, 10000); // Create a ball every 10 seconds
+}
+
+function stopBallCreationTimer() {
+    clearInterval(ballCreationTimer);
 }
 
 draw();
