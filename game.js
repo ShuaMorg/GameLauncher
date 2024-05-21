@@ -18,6 +18,7 @@ let square = {
 };
 
 let gameOver = false;
+let safePeriod = false;
 
 document.addEventListener('keydown', (event) => {
     if (gameOver) return;
@@ -111,12 +112,16 @@ function checkCollision(ball) {
     const distY = Math.abs(ball.y - square.y - square.size / 2);
 
     if (distX <= (square.size / 2 + ball.radius) && distY <= (square.size / 2 + ball.radius)) {
-        if (ball.color === 'green') {
+        if (ball.color === 'green' && !safePeriod) {
             gameOver = true;
             displayGameOver();
-        } else {
+        } else if (ball.color === 'red') {
             ball.color = 'green';
             splitBall(ball, balls.indexOf(ball));
+            safePeriod = true;
+            setTimeout(() => {
+                safePeriod = false;
+            }, 2000); // 2 seconds safe period
         }
     }
 }
