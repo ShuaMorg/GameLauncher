@@ -45,18 +45,6 @@
         .button:hover {
             background-color: darkgreen;
         }
-
-        .play-button {
-            background-color: darkred;
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-        .play-button:hover {
-            background-color: red;
-        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -66,7 +54,6 @@
         <a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a>
         <a class="button" href="https://shuamorg.github.io/circlebeep/">Circle Tap</a>
         <a class="button" href="https://shuamorg.github.io/theramin/">Theramin</a>
-        <button class="play-button" onclick="playTune()">Play Music</button>
     </div>
 
     <script>
@@ -104,6 +91,10 @@
                 currentTime += note.duration;
             });
         }
+
+        window.onload = function() {
+            playTune();
+        };
     </script>
 </body>
 </html>
