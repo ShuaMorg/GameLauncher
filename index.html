@@ -32,23 +32,36 @@
         }
 
         .button {
-            display: block;
-            background-color: lime;
-            color: black;
-            text-decoration: none;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid black;
-            transition: background-color 0.3s;
+            background-color: darkred;
+            color: white;
+            padding: 20px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
         }
 
         .button:hover {
-            background-color: darkgreen;
+            background-color: red;
+        }
+
+        #splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #game-container {
+            display: none; /* Initially hidden */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="splash-screen">
+        <h1>Welcome to Josh GPT's Retro Arcade!</h1>
+        <button class="button" onclick="startGame()">Click here to enter</button>
+    </div>
     <div class="container" id="game-container">
         <h1>Select a Game</h1>
         <a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a>
@@ -57,44 +70,46 @@
     </div>
 
     <script>
-        window.onload = function() {
+        function playTune() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
 
-            function playTune() {
-                const notes = [
-                    { frequency: 261.63, duration: 0.4 }, // C4
-                    { frequency: 293.66, duration: 0.4 }, // D4
-                    { frequency: 329.63, duration: 0.4 }, // E4
-                    { frequency: 349.23, duration: 0.4 }, // F4
-                    { frequency: 392.00, duration: 0.4 }, // G4
-                    { frequency: 440.00, duration: 0.4 }, // A4
-                    { frequency: 493.88, duration: 0.4 }, // B4
-                    { frequency: 523.25, duration: 0.4 }  // C5
-                ];
+            const notes = [
+                { frequency: 261.63, duration: 0.4 }, // C4
+                { frequency: 293.66, duration: 0.4 }, // D4
+                { frequency: 329.63, duration: 0.4 }, // E4
+                { frequency: 349.23, duration: 0.4 }, // F4
+                { frequency: 392.00, duration: 0.4 }, // G4
+                { frequency: 440.00, duration: 0.4 }, // A4
+                { frequency: 493.88, duration: 0.4 }, // B4
+                { frequency: 523.25, duration: 0.4 }  // C5
+            ];
 
-                let currentTime = audioCtx.currentTime;
+            let currentTime = audioCtx.currentTime;
 
-                notes.forEach(note => {
-                    const oscillator = audioCtx.createOscillator();
-                    const gainNode = audioCtx.createGain();
+            notes.forEach(note => {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
 
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioCtx.destination);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
 
-                    oscillator.type = 'square';
-                    oscillator.frequency.value = note.frequency;
-                    gainNode.gain.setValueAtTime(0.1, currentTime);
+                oscillator.type = 'square';
+                oscillator.frequency.value = note.frequency;
+                gainNode.gain.setValueAtTime(0.1, currentTime);
 
-                    oscillator.start(currentTime);
-                    oscillator.stop(currentTime + note.duration);
+                oscillator.start(currentTime);
+                oscillator.stop(currentTime + note.duration);
 
-                    currentTime += note.duration;
-                });
-            }
+                currentTime += note.duration;
+            });
+        }
 
+        function startGame() {
+            document.getElementById('splash-screen').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
             playTune();
-        };
+        }
     </script>
 </body>
 </html>
