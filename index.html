@@ -46,8 +46,16 @@
             background-color: darkgreen;
         }
 
-        audio {
-            display: none; /* Hide the audio player */
+        .play-button {
+            background-color: darkred;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .play-button:hover {
+            background-color: red;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -58,10 +66,44 @@
         <a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a>
         <a class="button" href="https://shuamorg.github.io/circlebeep/">Circle Tap</a>
         <a class="button" href="https://shuamorg.github.io/theramin/">Theramin</a>
+        <button class="play-button" onclick="playTune()">Play Music</button>
     </div>
-    <audio autoplay loop> <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Oddio_Overplay/Adhesive_Wombat/Adhesive_Wombat_-_08_Bit_Adventure/Adhesive_Wombat_-_08_Bit_Adventure.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 
+    <script>
+        function playTune() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioCtx = new AudioContext();
+
+            const notes = [
+                { frequency: 261.63, duration: 0.4 }, // C4
+                { frequency: 293.66, duration: 0.4 }, // D4
+                { frequency: 329.63, duration: 0.4 }, // E4
+                { frequency: 349.23, duration: 0.4 }, // F4
+                { frequency: 392.00, duration: 0.4 }, // G4
+                { frequency: 440.00, duration: 0.4 }, // A4
+                { frequency: 493.88, duration: 0.4 }, // B4
+                { frequency: 523.25, duration: 0.4 }  // C5
+            ];
+
+            let currentTime = audioCtx.currentTime;
+
+            notes.forEach(note => {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.type = 'square';
+                oscillator.frequency.value = note.frequency;
+                gainNode.gain.setValueAtTime(0.1, currentTime);
+
+                oscillator.start(currentTime);
+                oscillator.stop(currentTime + note.duration);
+
+                currentTime += note.duration;
+            });
+        }
+    </script>
 </body>
 </html>
