@@ -84,16 +84,29 @@
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
 
+
+
             const notes = [
-                { frequency: 261.63, duration: 0.4 }, // C4
-                { frequency: 293.66, duration: 0.4 }, // D4
-                { frequency: 329.63, duration: 0.4 }, // E4
-                { frequency: 349.23, duration: 0.4 }, // F4
-                { frequency: 392.00, duration: 0.4 }, // G4
-                { frequency: 440.00, duration: 0.4 }, // A4
-                { frequency: 493.88, duration: 0.4 }, // B4
-                { frequency: 523.25, duration: 0.4 }  // C5
-            ];
+    { frequency: 293.66, duration: 0.25 }, // D4
+    { frequency: 349.23, duration: 0.25 }, // F4
+    { frequency: 392.00, duration: 0.5 },  // G4
+    { frequency: 440.00, duration: 0.25 }, // A4
+    { frequency: 493.88, duration: 0.25 }, // B4
+    { frequency: 523.25, duration: 0.5 },  // C5
+    { frequency: 493.88, duration: 0.25 }, // B4
+    { frequency: 440.00, duration: 0.25 }, // A4
+    { frequency: 392.00, duration: 0.5 },  // G4
+    { frequency: 349.23, duration: 0.25 }, // F4
+    { frequency: 392.00, duration: 0.25 }, // G4
+    { frequency: 329.63, duration: 0.5 },  // E4
+    { frequency: 293.66, duration: 0.5 },  // D4
+    { frequency: 261.63, duration: 0.5 },  // C4
+    { frequency: 329.63, duration: 0.5 },  // E4
+    { frequency: 293.66, duration: 0.5 },  // D4
+    { frequency: 349.23, duration: 0.5 },  // F4
+    { frequency: 293.66, duration: 0.5 }   // D4
+];
+
 
             let currentTime = audioCtx.currentTime;
 
@@ -123,3 +136,4 @@
     </script>
 </body>
 </html>
+
