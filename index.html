@@ -24,6 +24,7 @@
             width: 90%;
             max-width: 400px;
             background-color: black;
+            box-sizing: border-box;
         }
 
         h1 {
@@ -32,16 +33,22 @@
         }
 
         .button {
-            color: white;
-            padding: 20px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1em;
-        }
-
+            color: black;
+    padding: 5px;
+    border: 5px solid transparent;
+    cursor: pointer;
+    text-decoration: dotted;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: lime;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-family: 'Press Start 2P', cursive;
+        }      
         .button:hover {
-            background-color: red;
+            border-color: darkred; /* Change border color on hover */
+            border-width: 5px;
+            border-style: dashed;
         }
 
         #splash-screen {
@@ -58,18 +65,18 @@
 </head>
 <body>
     <div id="splash-screen">
-        <h1>Welcome to Josh GPT's Retro Arcade!</h1>
+        <h1>Welcome to Edwyn and Josh's Arcade!</h1>
         <button class="button" onclick="startGame()">Click here to enter</button>
     </div>
     <div class="container" id="game-container">
         <h1>Select a Game</h1>
-        <a class="button" href="https://prime-elk-horribly.ngrok-free.app/">Sassy Oil</a>
+        <div><a class="button" href="https://prime-elk-horribly.ngrok-free.app/">Sassy Oil</a></div>
         <br><br><br>
-        <a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a>
+        <div><a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a></div>
         <br><br><br>
-        <a class="button" href="https://shuamorg.github.io/circlebeep/">Circle Tap</a>
+        <div><a class="button" href="https://shuamorg.github.io/circlebeep/">Circle Tap</a></div>
         <br><br><br>
-        <a class="button" href="https://shuamorg.github.io/theramin/">Theramin</a>
+        <div><a class="button" href="https://shuamorg.github.io/theramin/">Theramin</a></div>
     </div>
 
     <script>
