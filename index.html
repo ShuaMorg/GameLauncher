@@ -34,16 +34,16 @@
 
         .button {
             color: black;
-    padding: 5px;
-    border: 5px solid transparent;
-    cursor: pointer;
-    text-decoration: dotted;
-    display: inline-block;
-    box-sizing: border-box;
-    background-color: lime;
-    border-radius: 10px;
-    font-size: 1.5em;
-    font-family: 'Press Start 2P', cursive;
+            padding: 5px;
+            border: 5px solid transparent;
+            cursor: pointer;
+            text-decoration: dotted;
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: lime;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-family: 'Press Start 2P', cursive;
         }      
         .button:hover {
             border-color: darkred; /* Change border color on hover */
@@ -60,6 +60,18 @@
         #game-container {
             display: none; /* Initially hidden */
         }
+
+        .coming-soon-text {
+            color: lime;
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .betafun-text {
+            color: red;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -72,6 +84,8 @@
         <h1>Select a Game</h1>
         <div><a class="button" href="http://80.195.207.126/">Sassy Oil</a></div>
         <br><br><br>
+        <div class="coming-soon-text">More games coming soon, in the meantime see our concept tests below!</div>
+        <div class="betafun-text">Betafun:</div>
         <div><a class="button" href="https://shuamorg.github.io/Duke/">The Adventures of Fox, Chicken and Frog</a></div>
         <br><br><br>
         <div><a class="button" href="https://shuamorg.github.io/circlebeep/">Circle Tap</a></div>
@@ -84,29 +98,77 @@
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             const audioCtx = new AudioContext();
 
-
-
             const notes = [
-    { frequency: 293.66, duration: 0.25 }, // D4
-    { frequency: 349.23, duration: 0.25 }, // F4
-    { frequency: 392.00, duration: 0.5 },  // G4
-    { frequency: 440.00, duration: 0.25 }, // A4
-    { frequency: 493.88, duration: 0.25 }, // B4
-    { frequency: 523.25, duration: 0.5 },  // C5
-    { frequency: 493.88, duration: 0.25 }, // B4
-    { frequency: 440.00, duration: 0.25 }, // A4
-    { frequency: 392.00, duration: 0.5 },  // G4
-    { frequency: 349.23, duration: 0.25 }, // F4
-    { frequency: 392.00, duration: 0.25 }, // G4
-    { frequency: 329.63, duration: 0.5 },  // E4
-    { frequency: 293.66, duration: 0.5 },  // D4
-    { frequency: 261.63, duration: 0.5 },  // C4
-    { frequency: 329.63, duration: 0.5 },  // E4
-    { frequency: 293.66, duration: 0.5 },  // D4
-    { frequency: 349.23, duration: 0.5 },  // F4
-    { frequency: 293.66, duration: 0.5 }   // D4
-];
-
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 659.25, duration: 0.5 },  // MI (E5)
+                { frequency: 659.25, duration: 0.5 },  // MI (E5)
+                { frequency: 587.33, duration: 0.5 },  // RE (D5)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 739.99, duration: 0.5 },  // fa# (F#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 659.25, duration: 0.5 },  // MI (E5)
+                { frequency: 659.25, duration: 0.5 },  // MI (E5)
+                { frequency: 587.33, duration: 0.5 },  // RE (D5)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 739.99, duration: 0.5 },  // fa# (F#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 554.37, duration: 0.5 },  // DO# (C#5)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 261.63, duration: 0.5 },  // DO (C4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 329.63, duration: 0.5 },  // MI (E4)
+                { frequency: 392.00, duration: 0.5 },  // SOL (G4)
+                { frequency: 392.00, duration: 0.5 },  // SOL (G4)
+                { frequency: 349.23, duration: 0.5 },  // FA (F4)
+                { frequency: 329.63, duration: 0.5 },  // MI (E4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 261.63, duration: 0.5 },  // DO (C4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 329.63, duration: 0.5 },  // MI (E4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 261.63, duration: 0.5 },  // DO (C4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 329.63, duration: 0.5 },  // MI (E4)
+                { frequency: 440.00, duration: 0.5 },  // la (A4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 261.63, duration: 0.5 },  // DO (C4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 329.63, duration: 0.5 },  // MI (E4)
+                { frequency: 293.66, duration: 0.5 },  // RE (D4)
+                { frequency: 261.63, duration: 0.5 },  // DO (C4)
+                { frequency: 493.88, duration: 0.5 },  // si (B4)
+                { frequency: 440.00, duration: 0.5 }   // la (A4)
+            ];
 
             let currentTime = audioCtx.currentTime;
 
@@ -136,4 +198,5 @@
     </script>
 </body>
 </html>
+
 
